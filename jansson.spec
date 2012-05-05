@@ -1,5 +1,5 @@
 Name:		jansson
-Version:	2.2.1
+Version:	2.3.1
 Release:	1
 Summary:	C library for encoding, decoding and manipulating JSON data
 Group:		Development/C 
