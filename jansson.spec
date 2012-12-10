@@ -46,3 +46,14 @@ rm "$RPM_BUILD_ROOT%{_libdir}"/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
 %{_includedir}/*
+
+
+%changelog
+* Sat May 05 2012 Alexander Khrukin <akhrukin@mandriva.org> 2.3.1-1
++ Revision: 796627
+- version update 2.3.1
+
+* Sat Nov 05 2011 Alexander Khrukin <akhrukin@mandriva.org> 2.2.1-1
++ Revision: 721550
+- imported package jansson
+
