@@ -4,7 +4,7 @@
 
 Name:		jansson
 Version:	2.4
-Release:	1
+Release:	2
 Summary:	C library for encoding, decoding and manipulating JSON data
 Group:		Development/C 
 License:	MIT
