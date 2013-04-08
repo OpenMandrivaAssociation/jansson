@@ -27,7 +27,7 @@ C library for encoding, decoding and manipulating JSON data
 %package -n	%{devname}
 Summary:	Header files for jansson
 Group:		Development/C 
-Requires:	%{name} = %{version}-%{release}
+Requires:	%{libname} = %{version}-%{release}
 
 %description -n %{devname}
 Header files for developing applications making use of jansson.
