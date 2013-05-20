@@ -2,24 +2,23 @@
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
 
+Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
 Version:	2.4
 Release:	2
-Summary:	C library for encoding, decoding and manipulating JSON data
 Group:		Development/C 
 License:	MIT
-URL:		http://www.digip.org/jansson/
-Source0:	http://www.digip.org/jansson/releases/jansson-%{version}.tar.bz2
+Url:		http://www.digip.org/jansson/
+Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
 
-BuildRequires: python-sphinx
-
+BuildRequires:	python-sphinx
 
 %description
 Small library for parsing and writing JSON documents.
 
 %package -n %{libname}
-Summary: Libraries for encoding, decoding and manipulating JSON data
-Group: System/Libraries
+Summary:	Libraries for encoding, decoding and manipulating JSON data
+Group:		System/Libraries
 
 %description -n %{libname}
 C library for encoding, decoding and manipulating JSON data
@@ -45,12 +44,10 @@ make html
 make check
 
 %install
-make install INSTALL="install -p" DESTDIR="$RPM_BUILD_ROOT"
-rm "$RPM_BUILD_ROOT%{_libdir}"/*.la
-
+make install INSTALL="install -p" DESTDIR="%{buildroot}"
 
 %files -n %{libname}
-%{_libdir}/*.so.*
+%{_libdir}/libjansson.so.%{major}*
 
 %files -n %{devname}
 %doc LICENSE CHANGES
@@ -58,14 +55,4 @@ rm "$RPM_BUILD_ROOT%{_libdir}"/*.la
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
 %{_includedir}/*
-
-
-%changelog
-* Sat May 05 2012 Alexander Khrukin <akhrukin@mandriva.org> 2.3.1-1
-+ Revision: 796627
-- version update 2.3.1
-
-* Sat Nov 05 2011 Alexander Khrukin <akhrukin@mandriva.org> 2.2.1-1
-+ Revision: 721550
-- imported package jansson
 
