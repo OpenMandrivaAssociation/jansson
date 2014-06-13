@@ -5,7 +5,7 @@
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
 Version:	2.4
-Release:	6
+Release:	7
 Group:		Development/C 
 License:	MIT
 Url:		http://www.digip.org/jansson/
