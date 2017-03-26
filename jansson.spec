@@ -1,12 +1,12 @@
-%define major	4
+%define major 4
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
 
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
-Version:	2.6
-Release:	4
-Group:		Development/C 
+Version:	2.10
+Release:	1
+Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
@@ -23,10 +23,10 @@ Group:		System/Libraries
 %description -n %{libname}
 C library for encoding, decoding and manipulating JSON data
 
-%package -n	%{devname}
+%package -n %{devname}
 Summary:	Header files for jansson
-Group:		Development/C 
-Requires:	%{libname} = %{version}-%{release}
+Group:		Development/C
+Requires:	%{libname} = %{EVRD}
 
 %description -n %{devname}
 Header files for developing applications making use of jansson.

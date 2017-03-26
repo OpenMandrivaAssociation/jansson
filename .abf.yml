@@ -1,5 +1,2 @@
-removed_sources:
-  jansson-2.3.1.tar.bz2: af7497d930423088fa6d0699d84740fffa0c98df
-  jansson-2.4.tar.bz2: f11ff89dd484d89210d9f52a9ccc2ce2b9d2c1ae
 sources:
-  jansson-2.6.tar.bz2: a232e0f3de4bad49b6b682f4e5df14d6c4d02676
+  jansson-2.10.tar.bz2: d8eb6d1144d7392673f3d2a25bb1cf9e8454e252
