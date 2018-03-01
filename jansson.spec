@@ -4,13 +4,12 @@
 
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
-Version:	2.10
+Version:	2.11
 Release:	1
 Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
-
 BuildRequires:	python-sphinx
 
 %description
