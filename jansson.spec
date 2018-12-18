@@ -4,8 +4,8 @@
 
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
-Version:	2.11
-Release:	2
+Version:	2.12
+Release:	1
 Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
@@ -31,13 +31,13 @@ Requires:	%{libname} = %{EVRD}
 Header files for developing applications making use of jansson.
 
 %prep
-%setup -q
+%autosetup -p1
 
 %build
 export CC=%{__cc}
 autoreconf -v --install
 %configure --disable-static
-%make CC=%{__cc}
+%make_build CC=%{__cc}
 # do not make docs 
 # because of python3 need a fix
 #make html
@@ -46,7 +46,7 @@ autoreconf -v --install
 make check
 
 %install
-make install INSTALL="install -p" DESTDIR="%{buildroot}"
+%make_install INSTALL="install -p" DESTDIR="%{buildroot}"
 
 %files -n %{libname}
 %{_libdir}/libjansson.so.%{major}*
