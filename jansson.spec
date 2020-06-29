@@ -3,7 +3,7 @@
 %define devname %mklibname %{name} -d
 
 # (tpg) use workaround for https://github.com/akheron/jansson/issues/523
-%global ldflags %ldflags -Wl,-Bsymbolic
+%global build_ldflags %build_ldflags -Wl,-Bsymbolic
 
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
