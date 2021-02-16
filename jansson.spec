@@ -2,17 +2,17 @@
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
 
-# (tpg) use workaround for https://github.com/akheron/jansson/issues/523
-%global build_ldflags %build_ldflags -Wl,-Bsymbolic
-
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
 Version:	2.13.1
-Release:	2
+Release:	4
 Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
+# (tpg) https://github.com/akheron/jansson/issues/523
+Patch0:		0000-build-Add-a-symbol-version-to-all-exported-symbols-f.patch
+BuildRequires:	meson
 BuildRequires:	python-sphinx
 
 %description
@@ -37,19 +37,14 @@ Header files for developing applications making use of jansson.
 %autosetup -p1
 
 %build
-export CC=%{__cc}
-autoreconf -v --install
-%configure --disable-static
-%make_build CC=%{__cc}
-# do not make docs 
-# because of python3 need a fix
-#make html
+%meson
+%meson_build
 
 %check
-make check
+%meson_test
 
 %install
-%make_install INSTALL="install -p" DESTDIR="%{buildroot}"
+%meson_install
 
 %files -n %{libname}
 %{_libdir}/libjansson.so.%{major}*
