@@ -42,7 +42,7 @@ Header files for developing applications making use of jansson.
 %ninja_build
 
 %check
-%ninja_test
+%ninja_test -C build
 
 %install
 %ninja_install -C build
