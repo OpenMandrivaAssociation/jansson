@@ -12,7 +12,8 @@ Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
 # (tpg) https://github.com/akheron/jansson/issues/523
 Patch0:		0000-build-Add-a-symbol-version-to-all-exported-symbols-f.patch
-BuildRequires:	meson
+BuildRequires:	cmake
+BuildRequires:	ninja
 BuildRequires:	python-sphinx
 
 %description
@@ -37,14 +38,14 @@ Header files for developing applications making use of jansson.
 %autosetup -p1
 
 %build
-%meson
-%meson_build
+%cmake -G Ninja
+%ninja_build
 
 %check
-%meson_test
+%ninja_test
 
 %install
-%meson_install
+%ninja_install
 
 %files -n %{libname}
 %{_libdir}/libjansson.so.%{major}*
