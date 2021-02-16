@@ -45,7 +45,7 @@ Header files for developing applications making use of jansson.
 %ninja_test
 
 %install
-%ninja_install
+%ninja_install -C build
 
 %files -n %{libname}
 %{_libdir}/libjansson.so.%{major}*
