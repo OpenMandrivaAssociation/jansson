@@ -38,7 +38,10 @@ Header files for developing applications making use of jansson.
 %autosetup -p1
 
 %build
-%cmake -G Ninja
+%cmake \
+	-DJANSSON_BUILD_SHARED_LIBS=ON \
+	-G Ninja
+
 %ninja_build
 
 %check
