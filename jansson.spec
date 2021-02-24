@@ -10,8 +10,8 @@ Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
-# (tpg) https://github.com/akheron/jansson/issues/523
-Patch0:		0000-build-Add-a-symbol-version-to-all-exported-symbols-f.patch
+# (tpg) https://github.com/akheron/jansson/pull/573
+Patch0:		0000-use-version-script-in-case-of-linkers-that-does-not-.patch
 BuildRequires:	cmake
 BuildRequires:	ninja
 BuildRequires:	python-sphinx
