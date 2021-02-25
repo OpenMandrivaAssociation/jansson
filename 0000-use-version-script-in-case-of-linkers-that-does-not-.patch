@@ -6,27 +6,15 @@ Subject: [PATCH] use --version-script in case of linkers that does not support
 
 ---
  CMakeLists.txt | 39 +++++++++++++++++++++++++++++++++++----
- 1 file changed, 35 insertions(+), 4 deletions(-)
+ 1 file changed, 35 insertions(+), 4 deletions(-
 
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 1867b52..ba2c062 100644
---- a/CMakeLists.txt
-+++ b/CMakeLists.txt
-@@ -57,9 +57,6 @@ if (HAS_NO_FORMAT_TRUNCATION)
-     set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-format-truncation")
- endif()
- 
--include (CheckSymbolExists)
--check_symbol_exists("__GLIBC__" "stdlib.h" LIBC_IS_GLIBC)
--
- if (MSVC)
-    # Turn off Microsofts "security" warnings.
-    add_definitions( "/W3 /D_CRT_SECURE_NO_WARNINGS /wd4005 /wd4996 /nologo" )
-@@ -311,8 +308,42 @@ if(JANSSON_BUILD_SHARED_LIBS)
+diff -Naur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2020-05-07 18:37:26.000000000 +0000
++++ b/CMakeLists.txt	2021-02-25 12:39:00.550000000 +0000
+@@ -366,6 +366,44 @@
        ${JANSSON_HDR_PUBLIC}
        src/jansson.def)
  
--   if (LIBC_IS_GLIBC)
 +# check if linker support --default-symver
 +   list(APPEND CMAKE_REQUIRED_LIBRARIES "-Wl,--default-symver")
 +   check_c_source_compiles(
@@ -41,7 +29,7 @@ index 1867b52..ba2c062 100644
 +   list(REMOVE_ITEM CMAKE_REQUIRED_LIBRARIES "-Wl,--default-symver")
 +
 +   if (SYMVER_WORKS)
-       set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--default-symver")
++       set(CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} -Wl,--default-symver")
 +   else()
 +# some linkers may only support --version-script
 +      file(WRITE "${CMAKE_CURRENT_BINARY_DIR}/jansson.sym" "libjansson.so.${JANSSON_SOVERSION} {
@@ -63,9 +51,10 @@ index 1867b52..ba2c062 100644
 +      if (SYMVER_WORKS)
 +         set(CMAKE_SHARED_LINKER_FLAGS "-Wl,--version-script,${CMAKE_CURRENT_BINARY_DIR}/jansson.sym")
 +      endif()
-    endif()
- 
++    endif()
++
     set_target_properties(jansson PROPERTIES
--- 
+       VERSION ${JANSSON_VERSION}
+       SOVERSION ${JANSSON_SOVERSION})
+--
 2.30.1
-
