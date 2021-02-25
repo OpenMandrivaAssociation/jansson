@@ -12,6 +12,7 @@ Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
 # (tpg) https://github.com/akheron/jansson/pull/573
 Patch0:		0000-use-version-script-in-case-of-linkers-that-does-not-.patch
+Patch1:		0001-cmake-determine-arch-and-set-libdir.patch
 BuildRequires:	cmake
 BuildRequires:	ninja
 BuildRequires:	python-sphinx
@@ -40,6 +41,7 @@ Header files for developing applications making use of jansson.
 %build
 %cmake \
 	-DJANSSON_BUILD_SHARED_LIBS=ON \
+	-DJANSSON_INSTALL_LIB_DIR="%{_libdir}" \
 	-G Ninja
 
 %ninja_build
@@ -51,11 +53,11 @@ Header files for developing applications making use of jansson.
 %ninja_install -C build
 
 %files -n %{libname}
-%{_libdir}/libjansson.so.%{major}*
+%{_libdir}/*.so*
 
 %files -n %{devname}
 %doc LICENSE CHANGES
-#% doc doc/_build/html/*
 %{_libdir}/*.so
 %{_libdir}/pkgconfig/%{name}.pc
+%{_libdir}/cmake/%{name}
 %{_includedir}/*

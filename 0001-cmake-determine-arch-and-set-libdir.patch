@@ -1,0 +1,51 @@
+diff -Naur a/CMakeLists.txt b/CMakeLists.txt
+--- a/CMakeLists.txt	2021-02-25 13:21:34.075000000 +0000
++++ b/CMakeLists.txt	2021-02-25 13:46:37.996000000 +0000
+@@ -638,15 +638,25 @@
+ # Installation preparation.
+ #
+ 
++# try to determine architecture and set lib/lib32/lib64
++check_type_size("void*" SIZEOF_VOID_P BUILTIN_TYPES_ONLY LANGUAGE C)
++if (SIZEOF_VOID_P EQUAL 4)
++   set(LIB_SUFFIX "32")
++elseif (SIZEOF_VOID_P EQUAL 8)
++   set(LIB_SUFFIX "64")
++else ()
++   set(LIB_SUFFIX "")
++endif()
++
+ # Allow the user to override installation directories.
+-set(JANSSON_INSTALL_LIB_DIR       lib CACHE PATH "Installation directory for libraries")
++set(JANSSON_INSTALL_LIB_DIR       "lib${LIB_SUFFIX}" CACHE PATH "Installation directory for libraries")
+ set(JANSSON_INSTALL_BIN_DIR       bin CACHE PATH "Installation directory for executables")
+ set(JANSSON_INSTALL_INCLUDE_DIR   include CACHE PATH "Installation directory for header files")
+ 
+ if(WIN32 AND NOT CYGWIN)
+   set(DEF_INSTALL_CMAKE_DIR cmake)
+ else()
+-  set(DEF_INSTALL_CMAKE_DIR lib/cmake/jansson)
++  set(DEF_INSTALL_CMAKE_DIR lib${LIB_SUFFIX}/cmake/jansson)
+ endif()
+ 
+ set(JANSSON_INSTALL_CMAKE_DIR ${DEF_INSTALL_CMAKE_DIR} CACHE PATH "Installation directory for CMake files")
+@@ -699,8 +709,8 @@
+ if (JANSSON_INSTALL)
+   install(TARGETS jansson
+           EXPORT janssonTargets
+-          LIBRARY DESTINATION "lib"
+-          ARCHIVE DESTINATION "lib"
++          LIBRARY DESTINATION "lib${LIB_SUFFIX}"
++          ARCHIVE DESTINATION "lib${LIB_SUFFIX}"
+           RUNTIME DESTINATION "bin"
+           INCLUDES DESTINATION "include")
+ 
+@@ -710,7 +720,7 @@
+   # Install the pkg-config.
+   install(FILES
+           ${CMAKE_CURRENT_BINARY_DIR}/jansson.pc
+-          DESTINATION lib/pkgconfig)
++          DESTINATION lib${LIB_SUFFIX}/pkgconfig)
+ 
+   # Install the configs.
+   install(FILES
