@@ -5,7 +5,7 @@
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
 Version:	2.13.1
-Release:	4
+Release:	5
 Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
@@ -37,14 +37,13 @@ Header files for developing applications making use of jansson.
 
 %prep
 %autosetup -p1
-
-%build
 %cmake \
 	-DJANSSON_BUILD_SHARED_LIBS=ON \
 	-DJANSSON_INSTALL_LIB_DIR="%{_libdir}" \
 	-G Ninja
 
-%ninja_build
+%build
+%ninja_build -C build
 
 # (tpg) 2021-02-25 somehow all tests on ABF fails
 # but on local build everythig passes
@@ -53,6 +52,11 @@ Header files for developing applications making use of jansson.
 
 %install
 %ninja_install -C build
+
+# Get rid of a totally bogus "/usr//usr/lib64" reference
+sed -i -e 's,^libdir=.*,libdir=%{_libdir},g' %{buildroot}%{_libdir}/pkgconfig/*.pc
+# And a useless -L%{_libdir} too
+sed -i -e 's,-L\${libdir} ,,g' %{buildroot}%{_libdir}/pkgconfig/*.pc
 
 %files -n %{libname}
 %{_libdir}/*.so*
