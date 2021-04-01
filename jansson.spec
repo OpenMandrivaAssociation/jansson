@@ -1,3 +1,6 @@
+# (tpg) reduce bloat by excluding cmake requires on devel packages
+%global __requires_exclude ^cmake.*$
+
 %define major 4
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
@@ -5,7 +8,7 @@
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
 Version:	2.13.1
-Release:	5
+Release:	6
 Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
