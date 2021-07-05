@@ -4,6 +4,7 @@
 %define major 4
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname %{name} -d
+%define _disable_lto 1
 
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
@@ -14,7 +15,7 @@ License:	MIT
 Url:		http://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
 # (tpg) https://github.com/akheron/jansson/pull/573
-Patch0:		0000-use-version-script-in-case-of-linkers-that-does-not-.patch
+#Patch0:		0000-use-version-script-in-case-of-linkers-that-does-not-.patch
 Patch1:		0001-cmake-determine-arch-and-set-libdir.patch
 BuildRequires:	cmake
 BuildRequires:	ninja
