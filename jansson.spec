@@ -8,7 +8,7 @@
 Summary:	C library for encoding, decoding and manipulating JSON data
 Name:		jansson
 Version:	2.13.1
-Release:	6
+Release:	7
 Group:		Development/C
 License:	MIT
 Url:		http://www.digip.org/jansson/
@@ -62,7 +62,7 @@ sed -i -e 's,^libdir=.*,libdir=%{_libdir},g' %{buildroot}%{_libdir}/pkgconfig/*.
 sed -i -e 's,-L\${libdir} ,,g' %{buildroot}%{_libdir}/pkgconfig/*.pc
 
 %files -n %{libname}
-%{_libdir}/*.so*
+%{_libdir}/*.so.%{major}*
 
 %files -n %{devname}
 %doc LICENSE CHANGES
