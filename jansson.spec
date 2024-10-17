@@ -11,7 +11,7 @@ Version:	2.14
 Release:	2
 Group:		Development/C
 License:	MIT
-Url:		http://www.digip.org/jansson/
+Url:		https://www.digip.org/jansson/
 Source0:	http://www.digip.org/jansson/releases/%{name}-%{version}.tar.bz2
 Patch1:		0001-cmake-determine-arch-and-set-libdir.patch
 BuildRequires:	cmake
